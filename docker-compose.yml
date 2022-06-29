@@ -1,0 +1,29 @@
+version: '2'
+services:
+ web:
+  build:
+    context:
+    dockerfile: container-build/web/Dockerfile
+  environment:
+  - MYSQL_DATABASE=mezzio_01
+  - MYSQL_USER=root
+  - MYSQL_PASSWORD=
+  - MYSQL_HOST=db
+  ports:
+  - "8080:80"
+  volumes:
+  - .:/var/www
+  depends_on:
+  - db
+db:
+  image: mysql:8
+  ports:
+  - "6603:3306"
+  environment:
+  - MYSQL_ROOT_PASSWORD=
+  - MYSQL_DATABASE=mezzio_01
+  - MYSQL_USER=root
+  - MYSQL_PASSWORD=
+  volumes:
+  - "mysql_data:/var/lib/mysql"
+  - ./
