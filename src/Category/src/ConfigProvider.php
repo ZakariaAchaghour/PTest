@@ -4,10 +4,24 @@ declare(strict_types=1);
 
 namespace Category;
 
+use Category\Entity\Category;
+use Category\Entity\CategoryCollection;
+use Category\Handler\CreateHandler;
+use Category\Handler\CreateHandlerFactory;
+use Category\Handler\DeleteHandler;
+use Category\Handler\DeleteHandlerFactory;
+use Category\Handler\EditHandler;
+use Category\Handler\EditHandlerFactory;
 use Category\Handler\ListHandler;
 use Category\Handler\ListHandlerFactory;
+use Category\Handler\ShowHandler;
+use Category\Handler\ShowHandlerFactory;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Mezzio\Hal\Metadata\MetadataMap;
+use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
+use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
+use Laminas\Hydrator\ReflectionHydrator;
 /**
  * The configuration provider for the Category module
  *
@@ -27,6 +41,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
             'doctrine' => $this->getDoctrineEntities(),
+            MetadataMap::class => $this->getHalMetadataMap(),
         ];
     }
 
@@ -44,7 +59,11 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
-                ListHandler::class => ListHandlerFactory::class
+                ListHandler::class => ListHandlerFactory::class,
+                CreateHandler::class => CreateHandlerFactory::class,
+                EditHandler::class => EditHandlerFactory::class,
+                DeleteHandler::class => DeleteHandlerFactory::class,
+                ShowHandler::class => ShowHandlerFactory::class
             ],
         ];
     }
@@ -76,6 +95,24 @@ class ConfigProvider
                     'cache' => 'array',
                     'paths' => [__DIR__ . '/Entity'],
                 ],
+            ],
+        ];
+    }
+
+    public function getHalMetadataMap()
+    {
+        return [
+            [
+                '__class__'      => RouteBasedResourceMetadata::class,
+                'resource_class' => Category::class,
+                'route'          => 'categories.show', // assumes a route named 'albums.show' has been created
+                'extractor'      => ReflectionHydrator::class,
+            ],
+            [
+                '__class__'           => RouteBasedCollectionMetadata::class,
+                'collection_class'    => CategoryCollection::class,
+                'collection_relation' => 'category',
+                'route'               => 'categories.list', // assumes a route named 'albums.list' has been created
             ],
         ];
     }

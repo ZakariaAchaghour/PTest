@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace Category\Entity;
+
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -92,8 +94,31 @@ class Category
         }
     }
 
+     /**
+     * @return \DateTime
+     */
+    public function getDeletedAt(): \DateTime
+    {
+        return $this->deletedAt;
+    }
+    /**
+     * @param \DateTime $modified
+     * @throws \Exception
+     */
+    public function setDeletedAt(\DateTime $deletedAt = null): void
+    {
+        if (!$deletedAt) {
+            $this->deletedAt = new \DateTime("now");
+        } else {
+            $this->deletedAt = $deletedAt;
+        }
+    }
+
 
     public function setCategory(array $reuestBody) :void {
         $this->setName($reuestBody['name']);
+        $this->setModifiedAt(new DateTime());
     }
+
+
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 return [
     'dependencies' => [
         'factories' => [
-            Category\Handler\ListHandler::class => Category\Handler\ListHandlerFactory::class,
         ],
     ],
 ];

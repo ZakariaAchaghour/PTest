@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Category\Handler;
 
 use Category\Entity\Category;
-use Category\Entity\CategoryCollection;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Hal\HalResponseFactory;
 use Mezzio\Hal\ResourceGenerator;
+use phpDocumentor\Reflection\Types\Null_;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class ListHandler implements RequestHandlerInterface
+class ShowHandler implements RequestHandlerInterface
 {
     protected $entityManager;
     protected $responseFactory;
@@ -32,21 +30,17 @@ class ListHandler implements RequestHandlerInterface
         $this->resourceGenerator = $resourceGenerator;
         
     }
-
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-
-        $repository = $this->entityManager->getRepository(Category::class);
-
-        $query = $repository
-            ->createQueryBuilder('c')
-                 ->where('c.deletedAt IS NULL')
-            ->getQuery();
-        $query->setMaxResults('5');
-
-        $paginator = new CategoryCollection($query);
-        $resource  = $this->resourceGenerator->fromObject($paginator, $request);
-        return $this->responseFactory->createResponse($request, $resource);
-       
+        $id = $request->getAttribute('id');
+        $category = $this->entityManager->getRepository(Category::class)->findOneBy(array('id'=>$id  ,'deletedAt'=>null));
+        if(empty($category)){
+            $result['_error']['error'] = 'Not Found';
+            $result['_error']['error_description'] = 'Record Not Found.';
+            return new JsonResponse($result,404);
+           } 
+        $resource = $this->resourceGenerator->fromObject($category,$request);
+        return $this->responseFactory->createResponse($request,$resource);
+        
     }
 }

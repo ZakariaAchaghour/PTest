@@ -2,7 +2,11 @@
 
 namespace Category;
 
+use Category\Handler\CreateHandler;
+use Category\Handler\DeleteHandler;
+use Category\Handler\EditHandler;
 use Category\Handler\ListHandler;
+use Category\Handler\ShowHandler;
 use Psr\Container\ContainerInterface;
 use Mezzio\Application;
 class RoutesDelegator 
@@ -12,7 +16,12 @@ class RoutesDelegator
         $app = $callback();
         // setup routes 
       
-        $app->get('/api/v1/categories',ListHandler::class,'users.list');
+        $app->get('/api/v1/categories',ListHandler::class,'categories.list');
+        $app->get('/api/v1/categories/{id}',ShowHandler::class,'categories.show');
+        $app->delete('/api/v1/categories/{id}',DeleteHandler::class,'categories.delete');
+        $app->put('/api/v1/categories/{id}',EditHandler::class,'categories.edit');
+        $app->post('/api/v1/categories',CreateHandler::class,'categories.create');
+
       
         return $app;
     }
