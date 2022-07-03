@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220701074616 extends AbstractMigration
+final class Version20220703151520 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,18 +20,12 @@ final class Version20220701074616 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $roles = $schema->createTable('roles');
-        $roles->addColumn('id', Types::INTEGER)->setAutoincrement(true);
-        $roles->addColumn('name', Types::STRING);
-        $roles->addColumn('created_at', Types::DATETIME_MUTABLE);
-        $roles->setPrimaryKey(['id']);
-
+        $this->addSql('ALTER TABLE categories CHANGE deleted_at deleted_at DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $schema->dropTable('roles');
-
+        $this->addSql('ALTER TABLE categories CHANGE deleted_at deleted_at DATETIME NOT NULL');
     }
 }

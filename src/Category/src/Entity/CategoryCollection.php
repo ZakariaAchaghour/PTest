@@ -1,9 +1,9 @@
 <?php
 namespace Category\Entity;
 
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Common\Collections\ArrayCollection;
 
-class CategoryCollection extends Paginator
+class CategoryCollection extends ArrayCollection
 {
 
 }

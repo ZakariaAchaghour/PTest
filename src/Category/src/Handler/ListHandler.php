@@ -36,16 +36,17 @@ class ListHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
 
-        $repository = $this->entityManager->getRepository(Category::class);
+        $repository = $this->entityManager->getRepository(Category::class)->findBy(array('deletedAt'=>null));
 
-        $query = $repository
-            ->createQueryBuilder('c')
-                 ->where('c.deletedAt IS NULL')
-            ->getQuery();
-        $query->setMaxResults('5');
-
-        $paginator = new CategoryCollection($query);
-        $resource  = $this->resourceGenerator->fromObject($paginator, $request);
+        // $query = $repository
+        //     ->createQueryBuilder('c')
+        //          ->where('c.deletedAt IS NULL')
+        //     ->getQuery();
+        // $query->setMaxResults('5');
+        
+        
+        $collections = new CategoryCollection($repository);
+        $resource  = $this->resourceGenerator->fromObject($collections, $request);
         return $this->responseFactory->createResponse($request, $resource);
        
     }

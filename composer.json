@@ -70,7 +70,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/App/src/",
-            "Category\\": "src/Category/src/"
+            "Category\\": "src/Category/src/",
+            "Product\\": "src/Product/src/"
         }
     },
     "autoload-dev": {

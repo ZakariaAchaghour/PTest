@@ -14,6 +14,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Product\ConfigProvider::class,
     \DoctrineORMModule\ConfigProvider::class,
     \Laminas\Cache\ConfigProvider::class,
     \DoctrineModule\ConfigProvider::class,
