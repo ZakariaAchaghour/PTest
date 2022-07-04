@@ -6,7 +6,7 @@ namespace Product\Entity;
 use Category\Entity\Category;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass="ProductRepository"))
@@ -15,9 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Product {
 
     /**
+     * @var \Ramsey\Uuid\UuidInterface
+     *
      * @ORM\Id
-     * @ORM\Column(type="integer",nullable=false)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
    /**

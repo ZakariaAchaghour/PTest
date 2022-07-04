@@ -7,6 +7,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Product\Entity\Product;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Entity
@@ -15,11 +17,13 @@ use Product\Entity\Product;
 class Category 
 {
 
-  /**
+   /**
+     * @var Uuid
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(name="id", type="integer")
-     * @var integer
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     protected $id;
     /**
@@ -52,7 +56,7 @@ class Category
         $this->products = new ArrayCollection();
     }
 
-    public function getId (): int{
+    public function getId (){
         return $this->id;
     }
 
