@@ -35,7 +35,7 @@ class EditHandler implements RequestHandlerInterface
     {
         // Create and return a response
         $id = $request->getAttribute('id');
-
+      
         $requestBody = $request->getParsedBody();
         if(empty($requestBody)){
          $result['_error']['error'] = 'missing_request';
@@ -43,6 +43,7 @@ class EditHandler implements RequestHandlerInterface
          return new JsonResponse($result,400);
         } 
         $entity = $this->entityManager->getRepository(Category::class)->find($id);
+       
         if(empty($entity)){
             $result['_error']['error'] = 'Not Found';
             $result['_error']['error_description'] = 'Record Not Found.';

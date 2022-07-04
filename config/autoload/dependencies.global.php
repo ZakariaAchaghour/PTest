@@ -27,7 +27,7 @@ return [
     ],
     'db' => [
         'driver' => 'Pdo', 
-        'dsn' => 'mysqli:dbname=mezzio;hostname=localhost' ,
+        'dsn' => 'mysqli:dbname=mezzio_02;hostname=localhost' ,
         'driver_options' => [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAME \'UTF8\''
         ]

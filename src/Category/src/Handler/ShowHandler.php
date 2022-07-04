@@ -33,6 +33,8 @@ class ShowHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $id = $request->getAttribute('id');
+        // var_dump($id);
+        // die;
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(array('id'=>$id  ,'deletedAt'=>null));
         if(empty($category)){
             $result['_error']['error'] = 'Not Found';
