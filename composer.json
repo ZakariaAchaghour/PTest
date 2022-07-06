@@ -43,6 +43,7 @@
     },
     "require": {
         "php": "^7.4 || ~8.0.0 || ~8.1.0",
+        "beberlei/assert": "^3.3",
         "composer/package-versions-deprecated": "^1.10.99",
         "doctrine/doctrine-orm-module": "^5.1",
         "laminas/laminas-component-installer": "^2.6",
@@ -56,6 +57,7 @@
         "mezzio/mezzio-fastroute": "^3.0.3",
         "mezzio/mezzio-hal": "^2.4",
         "mezzio/mezzio-helpers": "^5.7",
+        "nette/utils": "^3.2",
         "prooph/common": "^4.5",
         "ramsey/uuid-doctrine": "^1.8",
         "roave/psr-container-doctrine": "^3.5"

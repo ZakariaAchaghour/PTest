@@ -6,6 +6,10 @@ namespace Category;
 
 use Category\Entity\Category;
 use Category\Entity\CategoryCollection;
+use Category\Entity\CategoryService;
+use Category\Entity\CategoryServiceFactory;
+use Category\Entity\CategoryServiceInteface;
+use Category\Entity\CategoryServiceInterface;
 use Category\Handler\CreateHandler;
 use Category\Handler\CreateHandlerFactory;
 use Category\Handler\DeleteHandler;
@@ -22,6 +26,8 @@ use Mezzio\Hal\Metadata\MetadataMap;
 use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
 use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+
 /**
  * The configuration provider for the Category module
  *
@@ -57,13 +63,18 @@ class ConfigProvider
                 ],
             ],
             'invokables' => [
+                
+            ],
+            'aliases' => [
             ],
             'factories'  => [
                 ListHandler::class => ListHandlerFactory::class,
                 CreateHandler::class => CreateHandlerFactory::class,
                 EditHandler::class => EditHandlerFactory::class,
                 DeleteHandler::class => DeleteHandlerFactory::class,
-                ShowHandler::class => ShowHandlerFactory::class
+                ShowHandler::class => ShowHandlerFactory::class,
+                CategoryServiceInterface::class => CategoryServiceFactory::class
+
             ],
         ];
     }

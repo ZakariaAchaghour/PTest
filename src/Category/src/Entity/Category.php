@@ -3,15 +3,17 @@ declare(strict_types=1);
 
 namespace Category\Entity;
 
+
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Product\Entity\Product;
+use Product\Entity\ProductCollection;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CategoryRepository")
  * @ORM\Table(name="categories")
  */
 class Category 
@@ -30,6 +32,10 @@ class Category
      * @ORM\Column(type="string", nullable=false, length=255)
      */
     protected $name;
+    /**
+    * @ORM\Column(type="string", nullable=false, length=255)
+    */
+    protected $slug;
      /**
      * @ORM\Column(name="created_at" ,type="datetime", nullable=false)
      */
@@ -45,15 +51,27 @@ class Category
      */
     protected $deletedAt;
 
+     /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="children", fetch="EAGER")
+     */
+    private $parent;
+
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
-     * @var Product[] An ArrayCollection of Product objects.
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parent", fetch="EAGER")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    
+    private $children;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="categories" , fetch="EAGER")
      */
     private $products;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId (){
@@ -67,6 +85,15 @@ class Category
     public function setName(string $name): void 
     {
         $this->name = $name;
+    }
+
+    public function getSlug (): string{
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void 
+    {
+        $this->slug = $slug;
     }
 
    /**
@@ -131,32 +158,70 @@ class Category
         }
     }
 
-    public function getCategory(bool $withProducts=false) {
-        $category = [
-            'id' => $this->category->getId(),
-            'name' => $this->category->getName(),
-            'createdAt' => $this->category->getCreatedAt()->format('Y-m-d H:i:s'),
-        ];
+    public function getParent()
+    {
+       return $this->parent;
+    }
 
-        if($withProducts && count($this->products) > 0){
-            $category['products'] = $this->products;
+    public function setParent($category)
+    {
+        $this->parent = $category;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function setChildren($children)
+    {
+        foreach ($children as $child) {
+            $this->children[] = $child;
         }
-        return $category;
     }
-    public function setCategory(array $reuestBody) :void {
-        $this->setName($reuestBody['name']);
-        $this->setModifiedAt(new DateTime());
-    }
-
     public function getProducts()
     {
         return $this->products;
     }
 
-    public function addProduct(Product $product)
+    public function setProduct(Product $product)
     {
         $this->products[] = $product;
     }
+   
 
+   
 
+    public function toArray()
+    {
+        $data = [
+            'id'=>  $this->id,
+            'name'=>  $this->name,
+            'slug'=> $this->slug,
+            'created_at' => $this->createdAt
+        ];
+        if($this->parent!= NULL) {
+            $parent = [
+                'id' => $this->parent->id,
+                'name' => $this->parent->name
+            ];
+            $data['parent'] = $parent;
+        }
+        if(!$this->products->isEmpty()){
+            
+            // $products = $this->products->filter(function($product) {
+            //         $product = $product->toArray();
+            //         $product = [
+            //             'id' => $product['id'],
+            //             'name' => $product['name']
+            //         ];
+            //     return $product;
+            // });
+
+            $data['products'] = $this->products;
+
+        }
+
+        return $data;
+    }
 }

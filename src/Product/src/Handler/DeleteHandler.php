@@ -7,8 +7,10 @@ namespace Product\Handler;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
+use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
 use Product\Entity\Product;
+use Product\Services\ProductServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,38 +18,33 @@ use Psr\Http\Server\RequestHandlerInterface;
 class DeleteHandler implements RequestHandlerInterface
 {
     protected $entityManager;
-
+    protected $productService;
     public function __construct(
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        ProductServiceInterface $productService
+
         )
     {
         $this->entityManager = $entityManager;
+        $this->productService = $productService;
+
         
     }
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        // Create and return a response
         $id = $request->getAttribute('id');
-        $entity = $this->entityManager->getRepository(Product::class)->find($id);
-        if(empty($entity)){
-            $result['_error']['error'] = 'Not Found';
-            $result['_error']['error_description'] = 'Record Not Found.';
-            return new JsonResponse($result,404);
-        } 
-
+        $result = ['status' => 200];
         try {
-            $entity->setDeletedAt(new DateTime());
-            $this->entityManager->merge($entity);
-            $this->entityManager->flush();
-        } catch (ORMException $e) {
-            $result['_error']['error'] = 'Not Deleted';
-            $result['_error']['error_description'] = $e->getMessage();
-            return new JsonResponse($result,400);
+            $result['message'] = 'Product Deleted';
+            $result['data'] = $this->productService->deleteProduct($id);
+            
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
         }
 
-        return new JsonResponse([
-                        'message' => 'Product Deleted!',
-                        'product' => null
-                    ]);
+        return new JsonResponse($result,$result['status']);
     }
 }

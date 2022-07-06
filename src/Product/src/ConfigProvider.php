@@ -22,6 +22,8 @@ use Product\Handler\ListHandler;
 use Product\Handler\ListHandlerFactory;
 use Product\Handler\ShowHandler;
 use Product\Handler\ShowHandlerFactory;
+use Product\Services\ProductServiceFactory;
+use Product\Services\ProductServiceInterface;
 
 /**
  * The configuration provider for the Product module
@@ -65,7 +67,8 @@ class ConfigProvider
                 ShowHandler::class => ShowHandlerFactory::class,
                 EditHandler::class => EditHandlerFactory::class,
                 DeleteHandler::class => DeleteHandlerFactory::class,
-                CreateHandler::class => CreateHandlerFactory::class
+                CreateHandler::class => CreateHandlerFactory::class,
+                ProductServiceInterface::class => ProductServiceFactory::class 
             ],
         ];
     }

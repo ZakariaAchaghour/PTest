@@ -5,11 +5,13 @@ namespace Product\Entity;
 
 use Category\Entity\Category;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Product\Repositories\ProductRepository;
 
 /**
- * @ORM\Entity(repositoryClass="ProductRepository"))
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ORM\Table(name="products")
  */
 class Product {
@@ -28,15 +30,21 @@ class Product {
      * @var string
      */
     private $name;
+     /**
+    * @ORM\Column(type="string", nullable=false, length=255)
+    */
+    protected $slug;
+
    /**
      * @ORM\Column(type="string",nullable=false)
      * @var string
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="decimal",scale=2,nullable=false)
-     * 
+    
+     /**
+     * @ORM\Embedded(class=Price::class)
+     * @var Price
      */
     private $price;
       /**
@@ -54,17 +62,17 @@ class Product {
      * @var DateTime
      */
     private $deletedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products" , fetch="EAGER")
-     * @ORM\JoinColumn(name="category_id",nullable=false, referencedColumnName="id")
+     
+     /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="products")
+     * @ORM\JoinTable(name="product_category")
      */
-    private $category;
+    private $categories;
     
 
     public function __construct()
     {
-
+        $this->categories = new ArrayCollection();
     }
     
     public function getId()
@@ -81,6 +89,16 @@ class Product {
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    public function getSlug (): string{
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
  
@@ -157,34 +175,52 @@ class Product {
     }
 
      
-    public function setPrice($price)
+    public function setPrice(Price $price)
     {
         $this->price = $price;
-
-        return $this;
     }
 
-    public function getCategory()
+    public function getCategories()
     {
         
-        return $this->category;
+        return $this->categories;
     }
 
      
     public function setCategory(Category $category)
     {
-        $category->addProduct($this);
-        $this->category = $category;
-
+        $category->setProduct($this);
+        $this->categories[] = $category;
         return $this;
     }
 
-    public function setProduct(array $requestBody) :void {
-        $this->setName($requestBody['name']);
-        $this->setDescription($requestBody['description']);
-        $this->setPrice($requestBody['price']);
-        $this->setUpdatedAt(new DateTime());
+  
+    public function toArray()
+    {
+        $data = [
+            'id'=>  $this->id,
+            'name'=>  $this->name,
+            'slug'=> $this->slug,
+            'description'=> $this->description,
+            'price' => $this->price->getAmount(),
+            'created_at' => $this->createdAt
+        ];
+       
+        if(!$this->categories->isEmpty()){
+            
+            // $categories = $this->categories->filter(function($category) {
+            //         $category = [
+            //             'id' => $category->getId(),
+            //             'name' => $category->getName()
+            //         ];
+            //     return $category;
+            // });
+
+            $data['categories'] = $this->categories;
+
+        }
+
+        return $data;
     }
-    
    
 }

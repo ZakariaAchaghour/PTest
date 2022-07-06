@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad4c4cc877994a37fedff0c9e2a68ce8",
+    "content-hash": "93b10a247d60c82db4ac0b7d30e64ce2",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -810,16 +810,16 @@
         },
         {
             "name": "doctrine/doctrine-module",
-            "version": "5.1.1",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineModule.git",
-                "reference": "50d8be604090d1caba019464af50f92ccd29af8a"
+                "reference": "cb29fac7684e02e86dc3fbb5326ad718aae822ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/50d8be604090d1caba019464af50f92ccd29af8a",
-                "reference": "50d8be604090d1caba019464af50f92ccd29af8a",
+                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/cb29fac7684e02e86dc3fbb5326ad718aae822ad",
+                "reference": "cb29fac7684e02e86dc3fbb5326ad718aae822ad",
                 "shasum": ""
             },
             "require": {
@@ -830,7 +830,7 @@
                 "doctrine/doctrine-laminas-hydrator": "^3.0.0",
                 "doctrine/event-manager": "^1.1.1",
                 "doctrine/inflector": "^2.0.4",
-                "doctrine/persistence": "^2.3.0",
+                "doctrine/persistence": "^2.3.0 || ^3.0.0",
                 "laminas/laminas-authentication": "^2.9.0",
                 "laminas/laminas-cache": "^3.1.2",
                 "laminas/laminas-eventmanager": "^3.4.0",
@@ -924,7 +924,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineModule/issues",
-                "source": "https://github.com/doctrine/DoctrineModule/tree/5.1.1"
+                "source": "https://github.com/doctrine/DoctrineModule/tree/5.2.0"
             },
             "funding": [
                 {
@@ -940,20 +940,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-23T14:21:11+00:00"
+            "time": "2022-07-02T12:21:44+00:00"
         },
         {
             "name": "doctrine/doctrine-orm-module",
-            "version": "5.1.0",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineORMModule.git",
-                "reference": "fe2985380bb35aef7940eb437f3b3d7197ea9c74"
+                "reference": "bb27271954a96461a611ace772973257c33bc83a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/fe2985380bb35aef7940eb437f3b3d7197ea9c74",
-                "reference": "fe2985380bb35aef7940eb437f3b3d7197ea9c74",
+                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/bb27271954a96461a611ace772973257c33bc83a",
+                "reference": "bb27271954a96461a611ace772973257c33bc83a",
                 "shasum": ""
             },
             "require": {
@@ -963,7 +963,7 @@
                 "doctrine/doctrine-module": "^5.1.0",
                 "doctrine/event-manager": "^1.1.1",
                 "doctrine/orm": "^2.11.1",
-                "doctrine/persistence": "^2.3.0",
+                "doctrine/persistence": "^2.3.0 || ^3.0.0",
                 "ext-json": "*",
                 "laminas/laminas-eventmanager": "^3.4.0",
                 "laminas/laminas-modulemanager": "^2.11.0",
@@ -1049,7 +1049,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineORMModule/issues",
-                "source": "https://github.com/doctrine/DoctrineORMModule/tree/5.1.0"
+                "source": "https://github.com/doctrine/DoctrineORMModule/tree/5.2.0"
             },
             "funding": [
                 {
@@ -1065,7 +1065,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-14T13:00:11+00:00"
+            "time": "2022-07-04T14:40:36+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -4389,6 +4389,91 @@
                 }
             ],
             "time": "2021-12-03T09:40:16+00:00"
+        },
+        {
+            "name": "nette/utils",
+            "version": "v3.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/utils.git",
+                "reference": "0af4e3de4df9f1543534beab255ccf459e7a2c99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/utils/zipball/0af4e3de4df9f1543534beab255ccf459e7a2c99",
+                "reference": "0af4e3de4df9f1543534beab255ccf459e7a2c99",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2 <8.2"
+            },
+            "conflict": {
+                "nette/di": "<3.0.6"
+            },
+            "require-dev": {
+                "nette/tester": "~2.0",
+                "phpstan/phpstan": "^1.0",
+                "tracy/tracy": "^2.3"
+            },
+            "suggest": {
+                "ext-gd": "to use Image",
+                "ext-iconv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
+                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
+                "ext-json": "to use Nette\\Utils\\Json",
+                "ext-mbstring": "to use Strings::lower() etc...",
+                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
+                "ext-xml": "to use Strings::length() etc. when mbstring is not available"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "array",
+                "core",
+                "datetime",
+                "images",
+                "json",
+                "nette",
+                "paginator",
+                "password",
+                "slugify",
+                "string",
+                "unicode",
+                "utf-8",
+                "utility",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/utils/issues",
+                "source": "https://github.com/nette/utils/tree/v3.2.7"
+            },
+            "time": "2022-01-24T11:29:14+00:00"
         },
         {
             "name": "nikic/fast-route",

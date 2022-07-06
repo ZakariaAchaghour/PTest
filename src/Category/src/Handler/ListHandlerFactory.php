@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Category\Handler;
 
+use Category\Entity\CategoryService;
+use Category\Entity\CategoryServiceInteface;
+use Category\Entity\CategoryServiceInterface;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManager;
 use Mezzio\Hal\HalResponseFactory;
@@ -16,10 +19,14 @@ class ListHandlerFactory
         $entityManager = $container->get(EntityManager::class);
         $responseFactory = $container->get(HalResponseFactory::class);
         $resourceGenerator = $container->get(ResourceGenerator::class);
+        $categoryService = $container->get(CategoryServiceInterface::class);
+        
         return new ListHandler(
             $entityManager,
             $responseFactory,
-            $resourceGenerator
+            $resourceGenerator,
+            $categoryService
+            
         );
     }
 }
