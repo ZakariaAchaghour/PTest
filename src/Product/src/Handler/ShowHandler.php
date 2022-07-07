@@ -42,7 +42,7 @@ class ShowHandler implements RequestHandlerInterface
         $id = $request->getAttribute('id');
         $result = ['status' => 200];
         try {
-            $result['data'] = $this->productService->findProduct($id)->toArray();
+            $result['data'] = $this->productService->findProduct($id)->toArray(true);
             
         } catch (Exception $e) {
             $result = [

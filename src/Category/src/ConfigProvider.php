@@ -6,10 +6,6 @@ namespace Category;
 
 use Category\Entity\Category;
 use Category\Entity\CategoryCollection;
-use Category\Entity\CategoryService;
-use Category\Entity\CategoryServiceFactory;
-use Category\Entity\CategoryServiceInteface;
-use Category\Entity\CategoryServiceInterface;
 use Category\Handler\CreateHandler;
 use Category\Handler\CreateHandlerFactory;
 use Category\Handler\DeleteHandler;
@@ -18,15 +14,18 @@ use Category\Handler\EditHandler;
 use Category\Handler\EditHandlerFactory;
 use Category\Handler\ListHandler;
 use Category\Handler\ListHandlerFactory;
+use Category\Handler\ProductsCategoryHandler;
+use Category\Handler\ProductsCategoryHandlerFactory;
 use Category\Handler\ShowHandler;
 use Category\Handler\ShowHandlerFactory;
+use Category\Services\CategoryServiceFactory;
+use Category\Services\CategoryServiceInterface;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Mezzio\Hal\Metadata\MetadataMap;
 use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
 use Laminas\Hydrator\ReflectionHydrator;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * The configuration provider for the Category module
@@ -73,6 +72,7 @@ class ConfigProvider
                 EditHandler::class => EditHandlerFactory::class,
                 DeleteHandler::class => DeleteHandlerFactory::class,
                 ShowHandler::class => ShowHandlerFactory::class,
+                ProductsCategoryHandler::class => ProductsCategoryHandlerFactory::class,
                 CategoryServiceInterface::class => CategoryServiceFactory::class
 
             ],

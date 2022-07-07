@@ -40,6 +40,10 @@ interface ProductServiceInterface  {
      */
     public function deleteProduct($id); 
 
-
+    /**
+     *
+     * @return Product[]
+     */
+    public function findProductsByCategory($îd);
 }
 

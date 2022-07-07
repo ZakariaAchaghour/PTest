@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Category\Entity;
+namespace Category\Services;
 
-use Category\Entity\CategoryService;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManager;
 

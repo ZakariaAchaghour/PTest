@@ -4,17 +4,19 @@ declare(strict_types=1);
 namespace Product\Entity;
 
 use Category\Entity\Category;
+use Category\Entity\CategoryCollection;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Product\Repositories\ProductRepository;
+use Shared\Model;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ORM\Table(name="products")
  */
-class Product {
+class Product implements Model {
 
     /**
      * @var \Ramsey\Uuid\UuidInterface
@@ -195,7 +197,7 @@ class Product {
     }
 
   
-    public function toArray()
+    public function toArray($withRelation)
     {
         $data = [
             'id'=>  $this->id,
@@ -206,21 +208,10 @@ class Product {
             'created_at' => $this->createdAt
         ];
        
-        if(!$this->categories->isEmpty()){
-            
-            // $categories = $this->categories->filter(function($category) {
-            //         $category = [
-            //             'id' => $category->getId(),
-            //             'name' => $category->getName()
-            //         ];
-            //     return $category;
-            // });
-
-            $data['categories'] = $this->categories;
-
+        if($withRelation && !$this->categories->isEmpty()){
+            $data['categories'] = (new CategoryCollection($this->categories->getValues()))->toArray(false);
         }
 
         return $data;
     }
-   
 }

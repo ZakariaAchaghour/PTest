@@ -2,6 +2,7 @@
 namespace Product\Repositories;
 
 use Doctrine\ORM\EntityRepository;
+use Product\Entity\Product;
 
 class ProductRepository  extends EntityRepository
 {
@@ -26,6 +27,16 @@ class ProductRepository  extends EntityRepository
                 ->getSingleResult()
             ;
         
+    }
+
+    public function findProductsByCategoryId($id)
+    {
+        return  $this->createQueryBuilder('p')
+        ->innerJoin('p.categories', 'c', 'WITH', 'c.id = :id')
+        ->where('p.deletedAt IS NULL')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getResult(); 
     }
    
 }

@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace Category\Handler;
 
-use Category\Entity\Category;
-use Category\Entity\CategoryServiceInterface;
-use Doctrine\ORM\EntityManager;
+use Category\Services\CategoryServiceInterface;
 use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
-use Mezzio\Hal\HalResponseFactory;
-use Mezzio\Hal\ResourceGenerator;
-use phpDocumentor\Reflection\Types\Null_;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -23,16 +18,10 @@ class ShowHandler implements RequestHandlerInterface
     protected $resourceGenerator;
     private $categoryService;
     public function __construct(
-        EntityManager $entityManager,
-        HalResponseFactory $responseFactory,
-        ResourceGenerator $resourceGenerator,
         CategoryServiceInterface $categoryService
 
         )
     {
-        $this->entityManager = $entityManager;
-        $this->responseFactory = $responseFactory;
-        $this->resourceGenerator = $resourceGenerator;
         $this->categoryService = $categoryService;
         
     }
@@ -41,7 +30,7 @@ class ShowHandler implements RequestHandlerInterface
         $id = $request->getAttribute('id');
         $result = ['status' => 200];
         try {
-            $result['data'] = $this->categoryService->findCategory($id)->toArray();
+            $result['data'] = $this->categoryService->findCategory($id)->toArray(true);
             
         } catch (Exception $e) {
             $result = [
@@ -49,11 +38,6 @@ class ShowHandler implements RequestHandlerInterface
                 'error' => $e->getMessage()
             ];
         }
-        // if(empty($category)){
-        //     $result['_error']['error'] = 'Not Found';
-        //     $result['_error']['error_description'] = 'Record Not Found.';
-        //     return new JsonResponse($result,404);
-        //    } 
        
         return new JsonResponse($result , $result['status']);
     }

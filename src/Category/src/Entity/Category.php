@@ -10,15 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Product\Entity\Product;
 use Product\Entity\ProductCollection;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Category\Repositories\CategoryRepository;
+
 use Ramsey\Uuid\Uuid;
+use Shared\Model;
 
 /**
- * @ORM\Entity(repositoryClass="CategoryRepository")
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="categories")
  */
-class Category 
+class Category implements Model
 {
-
    /**
      * @var Uuid
      *
@@ -192,7 +194,7 @@ class Category
 
    
 
-    public function toArray()
+    public function toArray($withRelation)
     {
         $data = [
             'id'=>  $this->id,
@@ -200,26 +202,18 @@ class Category
             'slug'=> $this->slug,
             'created_at' => $this->createdAt
         ];
-        if($this->parent!= NULL) {
+        if($withRelation && $this->parent!= NULL) {
             $parent = [
                 'id' => $this->parent->id,
                 'name' => $this->parent->name
             ];
             $data['parent'] = $parent;
         }
-        if(!$this->products->isEmpty()){
-            
-            // $products = $this->products->filter(function($product) {
-            //         $product = $product->toArray();
-            //         $product = [
-            //             'id' => $product['id'],
-            //             'name' => $product['name']
-            //         ];
-            //     return $product;
-            // });
-
-            $data['products'] = $this->products;
-
+        if($withRelation && !$this->children->isEmpty()){
+            $data['children'] = (new CategoryCollection($this->children->getValues()))->toArray(false);
+        }
+        if($withRelation && !$this->products->isEmpty()){
+            $data['products'] = (new ProductCollection($this->products->getValues()))->toArray(false);
         }
 
         return $data;

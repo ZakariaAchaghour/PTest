@@ -13,6 +13,7 @@ declare(strict_types=1);
 return [
     'dependencies' => [
         'factories' => [
+            Category\Handler\ProductsCategoryHandler::class => Category\Handler\ProductsCategoryHandlerFactory::class,
             Product\Handler\CreateHandler::class => Product\Handler\CreateHandlerFactory::class,
             Product\Handler\DeleteHandler::class => Product\Handler\DeleteHandlerFactory::class,
             Product\Handler\EditHandler::class => Product\Handler\EditHandlerFactory::class,

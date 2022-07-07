@@ -5,37 +5,39 @@ declare(strict_types=1);
 namespace Category\Handler;
 
 use Exception;
-use Category\Services\CategoryServiceInterface;
 use Laminas\Diactoros\Response\JsonResponse;
+use Product\Services\ProductServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-class CreateHandler implements RequestHandlerInterface
+
+class ProductsCategoryHandler implements RequestHandlerInterface
 {
-    protected $categoryService;
+
+   
+    private $productService;
     public function __construct(
-        CategoryServiceInterface $categoryService
+        ProductServiceInterface $productService
+
         )
     {
-        $this->categoryService = $categoryService;
+        $this->productService = $productService;
+        
     }
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-
-        // Create and return a response
-        $requestBody = $request->getParsedBody();
-        $result['status'] = 201;
-
+        $id = $request->getAttribute('id');
+        $result = ['status' => 200];
         try {
-            $result['message'] = 'Category Created';
-
-            $result['data'] = $this->categoryService->storeCategory($requestBody);
+            $result['data'] = $this->productService->findProductsByCategory($id);
+            
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
                 'error' => $e->getMessage()
             ];
         }
-        return new JsonResponse($result, $result['status']);
+       
+        return new JsonResponse($result , $result['status']);
     }
 }

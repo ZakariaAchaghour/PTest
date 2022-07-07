@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Product\Entity;
 
 use Assert\Assert;
-use Assert\Assertion;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

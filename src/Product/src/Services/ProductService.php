@@ -54,8 +54,8 @@ class ProductService implements ProductServiceInterface {
     public function storeProduct($data){
         $name = $data['name'];
         $description = $data['description'];
-        $slug = $data['slug'];
-        $categories = $data['categories'];
+        $slug = isset($data['slug']) ? $data['slug']: '';
+        $categories = isset($data['categories']) ? $data['categories']: [];
         $price = $data['price'];
         Assert::that($name,'Name')
                 ->notEmpty()
@@ -66,8 +66,7 @@ class ProductService implements ProductServiceInterface {
                 ->string()
                 ->minLength(3);
         Assert::that($categories,'Categories')
-                ->isArray()
-                ->notBlank();
+                ->isArray();
         $product = new Product();
         $product->setName($name);
         $product->setDescription($description);
@@ -78,16 +77,18 @@ class ProductService implements ProductServiceInterface {
         if(empty($slug)){
             $product->setSlug(Strings::webalize($name));
         } 
+        
         for ($i=0; $i < count($categories); $i++) { 
-            $category = $this->categoryRepository->find($categories[$i]);
+           
+            $category = $this->categoryRepository->findById($categories[$i]);
+           
             $product->setCategory($category);
         }
         $this->entityManager->persist($product);
         $this->entityManager->flush();
     
-        var_dump($product);
-        die;
-       return $product->toArray();
+        
+       return $product->toArray(true);
     }
     /**
      * {@inheritDoc}
@@ -97,8 +98,8 @@ class ProductService implements ProductServiceInterface {
        
         $name = $data['name'];
         $description = $data['description'];
-        $slug = $data['slug'];
-        $categories = $data['categories'];
+        $slug = isset($data['slug']) ? $data['slug']: '';
+        $categories = isset($data['categories']) ? $data['categories']: [];
         $price = $data['price'];
         Assert::that($name,'Name')
                 ->notEmpty()
@@ -129,9 +130,12 @@ class ProductService implements ProductServiceInterface {
             $this->entityManager->flush();
 
             
-        return $product->toArray();
+        return $product->toArray(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function deleteProduct($id){
         $product = $this->findProduct($id);
         $product->setDeletedAt(new DateTime());
@@ -141,7 +145,15 @@ class ProductService implements ProductServiceInterface {
         return null;
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    public function findProductsByCategory($id) {
+
+        $products = $this->productRepository->findProductsByCategoryId($id);
+        $products = new ProductCollection($products);
+        return $products->toArray(false);
+    }
 
 }
 

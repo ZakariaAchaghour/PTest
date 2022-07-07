@@ -1,5 +1,6 @@
 <?php
-namespace Category\Entity;
+namespace Category\Repositories;
+
 use Doctrine\ORM\EntityRepository;
 
 class CategoryRepository  extends EntityRepository
@@ -28,4 +29,6 @@ class CategoryRepository  extends EntityRepository
             ;
         
     }
+
+   
 }

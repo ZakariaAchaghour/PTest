@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Category\Entity;
+namespace Category\Services;
 
-use Ramsey\Uuid\Uuid;
+use Category\Entity\Category;
 
 interface CategoryServiceInterface  {
 
