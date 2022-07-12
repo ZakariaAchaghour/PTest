@@ -12,10 +12,10 @@ use Prooph\EventSourcing\AggregateChanged;
 class PostWasCreated extends AggregateChanged
 {
 
-//    /**
-//     * @var string
-//     */
-//    protected $messageName = 'post-was-created';
+   /**
+    * @var string
+    */
+   protected $messageName = 'post-was-created';
 
     /**
      * @var PostId

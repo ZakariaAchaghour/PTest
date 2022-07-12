@@ -16,14 +16,18 @@ use Post\Response\JsonResponse;
 use Post\App\Commands\CreatePost;
 use Post\App\Handlers\CreateHandler;
 use Post\Container\CreateHandlerFactory;
+use Post\Container\ReadModel\Finder\PostsFinderFactory;
 use Post\Infrastructure\PostRepositoryImpl;
 use Post\Model\Repository\PostRepository;
+use Post\ReadModel\Finder\PostsFinder;
+use Post\ReadModel\Queries\FetchPosts;
 use Prooph\Common\Messaging\FQCNMessageFactory;
 use Prooph\EventSourcing\Container\Aggregate\AggregateRepositoryFactory;
 use Prooph\EventStore\EventStore;
 use Prooph\EventStore\Pdo\Container\MySqlEventStoreFactory;
 use Prooph\EventStore\Pdo\Container\MySqlProjectionManagerFactory;
 use Prooph\EventStore\Pdo\MySqlEventStore;
+use Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSimpleStreamStrategy;
 use Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy;
 use Prooph\EventStore\Projection\ProjectionManager;
 use Prooph\EventStoreBusBridge\Container\TransactionManagerFactory;
@@ -34,8 +38,12 @@ use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Container\CommandBusFactory;
 use Prooph\ServiceBus\Container\QueryBusFactory;
 use Prooph\ServiceBus\EventBus;
+use Prooph\ServiceBus\Plugin\InvokeStrategy\FinderInvokeStrategy;
 use Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy;
 use Prooph\ServiceBus\QueryBus;
+use Prooph\SnapshotStore\Pdo\Container\PdoSnapshotStoreFactory;
+use Prooph\SnapshotStore\SnapshotStore;
+
 // return [
 //     'prooph' => [
 //         'middleware' => [
@@ -247,14 +255,22 @@ return [
                 'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
             ],
         ],
+        'pdo_snapshot_store' => [
+            'default' => [
+                'connection_service' => 'pdo.connection',
+            ],
+        ],
         'event_sourcing' => [
             'aggregate_repository' => [
                 'post_collection' => [
                     'repository_class' => PostRepositoryImpl::class,
-                    'aggregate_type' => Post::class,
+                    'aggregate_type' => [
+                        'post' => Post::class,
+                    ],
                     'aggregate_translator' => \Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator::class,
                     'stream_name' => 'post',
                     'one_stream_per_aggregate' => true,
+                    'snapshot_store' => SnapshotStore::class,
                 ],
             ],
         ],
@@ -262,7 +278,9 @@ return [
             'default' => [
                 'connection' => 'pdo.connection',
                 'message_factory' => FQCNMessageFactory::class,
-                'persistence_strategy' => MySqlSingleStreamStrategy::class,
+                // 'persistence_strategy' => MySqlSingleStreamStrategy::class,
+                'persistence_strategy' => MySqlSimpleStreamStrategy::class,
+                // 'persistence_strategy' => MySqlAggregateStreamStrategy::class,
                 'plugins' => [
                     EventPublisher::class,
                 ],
@@ -305,7 +323,11 @@ return [
             'query_bus' => [
                 'router' => [
                     'routes' => [
+                        FetchPosts::class => PostsFinder::class,
                        ],
+                ],
+                'plugins' => [
+                    FinderInvokeStrategy::class,
                 ],
             ],
         ],
@@ -331,7 +353,7 @@ return [
             // \Prooph\Cli\Console\Helper\ClassInfo::class => \Prooph\ProophessorDo\Container\Console\Psr4ClassInfoFactory::class,
             // persistence strategies
             MySqlSingleStreamStrategy::class => InvokableFactory::class,
-            
+            MySqlSimpleStreamStrategy::class => InvokableFactory::class,
             EventStore::class => MySqlEventStoreFactory::class,
             ProjectionManager::class => MySqlProjectionManagerFactory::class,
             PostRepository::class => [AggregateRepositoryFactory::class, 'post_collection'],
@@ -340,6 +362,11 @@ return [
             JsonResponse::class => InvokableFactory::class,
             AggregateTranslator::class => InvokableFactory::class,
             OnEventStrategy::class => InvokableFactory::class,
+            SnapshotStore::class => PdoSnapshotStoreFactory::class,
+
+            PostsFinder::class => PostsFinderFactory::class,
+            FinderInvokeStrategy::class => InvokableFactory::class,
+
         ],
 
     ],
