@@ -59,8 +59,19 @@
         "mezzio/mezzio-helpers": "^5.7",
         "nette/utils": "^3.2",
         "prooph/common": "^4.5",
+        "prooph/event-sourcing": "^5.7",
+        "prooph/event-store": "^7.7",
+        "prooph/event-store-bus-bridge": "^3.4",
+        "prooph/http-middleware": "^0.2.0",
+        "prooph/pdo-event-store": "^1.14",
+        "prooph/pdo-snapshot-store": "^1.5",
+        "prooph/service-bus": "^6.3",
+        "prooph/snapshot-store": "^1.4",
+        "prooph/snapshotter": "^2.2",
+        "prooph/standard-projections": "^1.1",
         "ramsey/uuid-doctrine": "^1.8",
-        "roave/psr-container-doctrine": "^3.5"
+        "roave/psr-container-doctrine": "^3.5",
+        "sandrokeil/interop-config": "^2.2"
     },
     "require-dev": {
         "laminas/laminas-development-mode": "^3.3.0",
@@ -74,7 +85,8 @@
             "App\\": "src/App/src/",
             "Category\\": "src/Category/src/",
             "Product\\": "src/Product/src/",
-            "Shared\\": "src/Shared/"
+            "Shared\\": "src/Shared/",
+            "Post\\": "src/Post/"
         }
     },
     "autoload-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93b10a247d60c82db4ac0b7d30e64ce2",
+    "content-hash": "71fa1ccd90ad086e052d2019aa7237cb",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2294,16 +2294,16 @@
         },
         {
             "name": "laminas/laminas-diactoros",
-            "version": "2.11.2",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "78846cbce0550ec174508a646f46fd6dee76099b"
+                "reference": "34ba65010be9aa74e159d168c5ecfa5c01e4d956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/78846cbce0550ec174508a646f46fd6dee76099b",
-                "reference": "78846cbce0550ec174508a646f46fd6dee76099b",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/34ba65010be9aa74e159d168c5ecfa5c01e4d956",
+                "reference": "34ba65010be9aa74e159d168c5ecfa5c01e4d956",
                 "shasum": ""
             },
             "require": {
@@ -2324,13 +2324,13 @@
                 "ext-dom": "*",
                 "ext-gd": "*",
                 "ext-libxml": "*",
-                "http-interop/http-factory-tests": "^0.8.0",
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "php-http/psr7-integration-tests": "^1.1",
+                "http-interop/http-factory-tests": "^0.9.0",
+                "laminas/laminas-coding-standard": "~2.3.0",
+                "php-http/psr7-integration-tests": "^1.1.1",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.1",
-                "psalm/plugin-phpunit": "^0.14.0",
-                "vimeo/psalm": "^4.3"
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.17.0",
+                "vimeo/psalm": "^4.24.0"
             },
             "type": "library",
             "extra": {
@@ -2389,7 +2389,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-06-29T14:15:02+00:00"
+            "time": "2022-07-07T12:31:03+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -3403,16 +3403,16 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.13.0",
+            "version": "3.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "6f96556ee314f9e0d57d83967c0087332836c31d"
+                "reference": "918de970b2c3d42acebff3d431d76db52b6a32a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/6f96556ee314f9e0d57d83967c0087332836c31d",
-                "reference": "6f96556ee314f9e0d57d83967c0087332836c31d",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/918de970b2c3d42acebff3d431d76db52b6a32a2",
+                "reference": "918de970b2c3d42acebff3d431d76db52b6a32a2",
                 "shasum": ""
             },
             "require": {
@@ -3490,7 +3490,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-06-29T08:01:37+00:00"
+            "time": "2022-07-07T16:13:26+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -3883,6 +3883,79 @@
                 }
             ],
             "time": "2022-02-22T13:52:44+00:00"
+        },
+        {
+            "name": "marc-mabe/php-enum",
+            "version": "v4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marc-mabe/php-enum.git",
+                "reference": "3da42cc1daceaf98c858e56f59d1ccd52b011fdc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/3da42cc1daceaf98c858e56f59d1ccd52b011fdc",
+                "reference": "3da42cc1daceaf98c858e56f59d1ccd52b011fdc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-reflection": "*",
+                "php": "^7.1 | ^8.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.16.10 || ^1.0.4",
+                "phpstan/phpstan": "^1.3.1",
+                "phpunit/phpunit": "^7.5.20 | ^8.5.22 | ^9.5.11",
+                "vimeo/psalm": "^4.17.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.6-dev",
+                    "dev-3.x": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MabeEnum\\": "src/"
+                },
+                "classmap": [
+                    "stubs/Stringable.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Bennewitz",
+                    "email": "dev@mabe.berlin",
+                    "homepage": "https://mabe.berlin/",
+                    "role": "Lead"
+                }
+            ],
+            "description": "Simple and fast implementation of enumerations with native PHP",
+            "homepage": "https://github.com/marc-mabe/php-enum",
+            "keywords": [
+                "enum",
+                "enum-map",
+                "enum-set",
+                "enumeration",
+                "enumerator",
+                "enummap",
+                "enumset",
+                "map",
+                "set",
+                "type",
+                "type-hint",
+                "typehint"
+            ],
+            "support": {
+                "issues": "https://github.com/marc-mabe/php-enum/issues",
+                "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.0"
+            },
+            "time": "2022-04-19T02:21:46+00:00"
         },
         {
             "name": "mezzio/mezzio",
@@ -4642,6 +4715,746 @@
             "time": "2021-01-04T18:46:32+00:00"
         },
         {
+            "name": "prooph/event-sourcing",
+            "version": "v5.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/event-sourcing.git",
+                "reference": "4b8e2e50f9029f0e8006f7c3bbb5c60519f3f4f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/event-sourcing/zipball/4b8e2e50f9029f0e8006f7c3bbb5c60519f3f4f7",
+                "reference": "4b8e2e50f9029f0e8006f7c3bbb5c60519f3f4f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0",
+                "prooph/event-store": "^7.0"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "prooph/snapshot-store": "^1.2.0",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "prooph/snapshot-store": "For usage with snapshots"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\EventSourcing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "kontakt@codeliner.ws"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "PHP EventSourcing library",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "EventSourcing",
+                "ddd",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/event-sourcing/issues",
+                "source": "https://github.com/prooph/event-sourcing/tree/v5.7.0"
+            },
+            "time": "2021-03-22T22:39:05+00:00"
+        },
+        {
+            "name": "prooph/event-store",
+            "version": "v7.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/event-store.git",
+                "reference": "728f99e869889bf0c06ca0f0d5faa29418d42916"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/event-store/zipball/728f99e869889bf0c06ca0f0d5faa29418d42916",
+                "reference": "728f99e869889bf0c06ca0f0d5faa29418d42916",
+                "shasum": ""
+            },
+            "require": {
+                "marc-mabe/php-enum": "^2.3.1 || ^3.0.0 || ^4.0.0",
+                "php": "^7.3 || ^8.0",
+                "prooph/common": "^4.5.0"
+            },
+            "conflict": {
+                "beberlei/assert": "3.2.3 - 3.2.4",
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.10.3",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/php-invoker": "^3.1",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "prooph/event-sourcing": "Basic functionality for event sourced aggregates",
+                "prooph/pdo-event-store": "For usage with MySQL or Postgres as event store",
+                "prooph/service-bus": "Message bus facade to connect the event store with messaging systems",
+                "psr/container": "^1.0 for usage of provided factories",
+                "sandrokeil/interop-config": "For usage of provided factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\EventStore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.prooph.de"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "PHP EventStore Implementation",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "EventSourcing",
+                "EventStore",
+                "ddd",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/event-store/issues",
+                "source": "https://github.com/prooph/event-store/tree/v7.7.0"
+            },
+            "time": "2022-04-26T02:50:00+00:00"
+        },
+        {
+            "name": "prooph/event-store-bus-bridge",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/event-store-bus-bridge.git",
+                "reference": "8df1c8ab6ea3ad9254117e40af827bdd8841c7e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/event-store-bus-bridge/zipball/8df1c8ab6ea3ad9254117e40af827bdd8841c7e4",
+                "reference": "8df1c8ab6ea3ad9254117e40af827bdd8841c7e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 | ^8.0",
+                "prooph/common": "^4.2.1",
+                "prooph/event-store": "^7.3.1",
+                "prooph/service-bus": "^6.3"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "psr/container": "^1.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\EventStoreBusBridge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "kontakt@codeliner.ws"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "Marry CQRS with Event Sourcing",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "EventSourcing",
+                "cqrs",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/event-store-bus-bridge/issues",
+                "source": "https://github.com/prooph/event-store-bus-bridge/tree/v3.4.0"
+            },
+            "time": "2021-08-26T00:11:08+00:00"
+        },
+        {
+            "name": "prooph/http-middleware",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/http-middleware.git",
+                "reference": "ce6fe34c79cb8d2c32ebfe3a096e6724e681f62d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/http-middleware/zipball/ce6fe34c79cb8d2c32ebfe3a096e6724e681f62d",
+                "reference": "ce6fe34c79cb8d2c32ebfe3a096e6724e681f62d",
+                "shasum": ""
+            },
+            "require": {
+                "fig/http-message-util": "^1.1",
+                "php": "^7.1",
+                "prooph/common": "^4.1",
+                "prooph/service-bus": "^6.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-middleware": "^1.0",
+                "react/promise": "^2.2"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "malukenho/docheader": "^0.1.4",
+                "phpspec/prophecy": "^1.7",
+                "phpunit/phpunit": "^6.5",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.2.1",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0",
+                "zendframework/zend-servicemanager": "^3.1"
+            },
+            "suggest": {
+                "psr/container": "^1.0 for usage of provided factories",
+                "sandrokeil/interop-config": "^2.0 for usage of provided factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\HttpMiddleware\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                },
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://prooph-software.com/"
+                },
+                {
+                    "name": "Sandro Keil",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://prooph-software.com/"
+                },
+                {
+                    "name": "Bas Kamer",
+                    "email": "baskamer@gmail.com"
+                }
+            ],
+            "description": "http middleware for prooph components",
+            "homepage": "http://prooph-software.com/",
+            "keywords": [
+                "Service Bus",
+                "cqrs",
+                "event sourcing",
+                "messaging",
+                "middleware",
+                "prooph",
+                "psr-15",
+                "psr-7",
+                "psr15",
+                "psr7"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/http-middleware/issues",
+                "source": "https://github.com/prooph/http-middleware/tree/master"
+            },
+            "time": "2018-04-10T07:36:57+00:00"
+        },
+        {
+            "name": "prooph/pdo-event-store",
+            "version": "v1.14.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/pdo-event-store.git",
+                "reference": "695a2f4c3adf1ff2be31348e69e568bf5d574a64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/pdo-event-store/zipball/695a2f4c3adf1ff2be31348e69e568bf5d574a64",
+                "reference": "695a2f4c3adf1ff2be31348e69e568bf5d574a64",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": "^7.3 | ^8.0",
+                "prooph/event-store": "^v7.6"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/php-invoker": "^3.1",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "ext-pdo_mysql": "For usage with MySQL",
+                "ext-pdo_pgsql": "For usage with PostgreSQL",
+                "psr/container": "^1.0 for usage of provided factories",
+                "sandrokeil/interop-config": "^2.0.1 for usage of provided factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\EventStore\\Pdo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "kontakt@codeliner.ws"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "Prooph PDO EventStore",
+            "homepage": "http://getprooph.org/",
+            "support": {
+                "issues": "https://github.com/prooph/pdo-event-store/issues",
+                "source": "https://github.com/prooph/pdo-event-store/tree/v1.14.2"
+            },
+            "time": "2022-05-31T14:43:41+00:00"
+        },
+        {
+            "name": "prooph/pdo-snapshot-store",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/pdo-snapshot-store.git",
+                "reference": "d43b2330fc0ff56e767f4e415a089dc01a058361"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/pdo-snapshot-store/zipball/d43b2330fc0ff56e767f4e415a089dc01a058361",
+                "reference": "d43b2330fc0ff56e767f4e415a089dc01a058361",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "prooph/snapshot-store": "^1.1"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.7",
+                "phpunit/phpunit": "^6.0",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.3",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0",
+                "sebastian/comparator": "^1.2.2"
+            },
+            "suggest": {
+                "prooph/pdo-event-store": "^1.0 For usage with MySQL or Postgres as event store",
+                "prooph/snapshotter": "^2.0 Taking snapshots with ease",
+                "psr/container": "^1.0 for usage of provided factories",
+                "sandrokeil/interop-config": "^2.0.1 for usage of provided factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\SnapshotStore\\Pdo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                },
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.prooph.de"
+                }
+            ],
+            "description": "PDO Snapshot Store Implementation",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "EventSourcing",
+                "EventStore",
+                "ddd",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/pdo-snapshot-store/issues",
+                "source": "https://github.com/prooph/pdo-snapshot-store/tree/master"
+            },
+            "time": "2019-04-26T23:36:01+00:00"
+        },
+        {
+            "name": "prooph/service-bus",
+            "version": "v6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/service-bus.git",
+                "reference": "8645e3a15d104843b5c8aeb5ce345b16be6279de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/service-bus/zipball/8645e3a15d104843b5c8aeb5ce345b16be6279de",
+                "reference": "8645e3a15d104843b5c8aeb5ce345b16be6279de",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 | ^8.0",
+                "prooph/common": "^4.0.0"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<2.0.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "psr/container": "^1.0",
+                "react/promise": "^2.4.1",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "prooph/event-store-bus-bridge": "Let the EventBus dispatch persisted DomainEvents",
+                "prooph/service-bus-zfc-rbac-bridge": "Use ZfcRbac as authorization service for route and finalize guard",
+                "psr/container": "^1.0 for usage of provided factories",
+                "react/promise": "^2.4.1 for usage with provided QueryBus",
+                "sandrokeil/interop-config": "For usage of provided factories",
+                "zendframework/zend-servicemanager": "Use Zend ServiceManager to lazy load your handlers and listeners"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\ServiceBus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "kontakt@codeliner.ws"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "PHP Enterprise Service Bus Implementation supporting CQRS and DDD",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "cqrs",
+                "ddd",
+                "messaging",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/service-bus/issues",
+                "source": "https://github.com/prooph/service-bus/tree/v6.3.0"
+            },
+            "time": "2021-08-25T17:08:43+00:00"
+        },
+        {
+            "name": "prooph/snapshot-store",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/snapshot-store.git",
+                "reference": "2f84cfeb9d116974b63a1e3304c0849776c206b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/snapshot-store/zipball/2f84cfeb9d116974b63a1e3304c0849776c206b7",
+                "reference": "2f84cfeb9d116974b63a1e3304c0849776c206b7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "prooph/common": "^4.1"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpunit/phpunit": "^6.0 || ^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.3 || ^0.4",
+                "psr/container": "^1.0",
+                "sandrokeil/interop-config": "^2.0.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "sandrokeil/interop-config": "^2.0.1 for usage of provided factories"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\SnapshotStore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.prooph.de"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "Prooph Snapshot Store",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "EventSourcing",
+                "ddd",
+                "prooph"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/snapshot-store/issues",
+                "source": "https://github.com/prooph/snapshot-store/tree/v1.4.0"
+            },
+            "time": "2021-02-22T02:27:50+00:00"
+        },
+        {
+            "name": "prooph/snapshotter",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/snapshotter.git",
+                "reference": "42b19e4b7535ab9a9761127d43f4d74dbd3f03f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/snapshotter/zipball/42b19e4b7535ab9a9761127d43f4d74dbd3f03f9",
+                "reference": "42b19e4b7535ab9a9761127d43f4d74dbd3f03f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 | ^8.0",
+                "prooph/event-sourcing": "^5.0",
+                "prooph/event-store": "^7.0",
+                "prooph/snapshot-store": "^1.0"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.9",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/php-cs-fixer-config": "^0.4",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "prooph/mongodb-snapshot-store": "^1.0 for MongoDB as Snapshot Store",
+                "prooph/pdo-snapshot-store": "^1.0 for PDO as Snapshot Store"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\Snapshotter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.prooph.de"
+                },
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                }
+            ],
+            "description": "snapshot tool for prooph event-store",
+            "homepage": "http://getprooph.org/",
+            "keywords": [
+                "ddd",
+                "event-sourcing",
+                "event-store",
+                "prooph",
+                "snapshot"
+            ],
+            "support": {
+                "issues": "https://github.com/prooph/snapshotter/issues",
+                "source": "https://github.com/prooph/snapshotter/tree/v2.2.0"
+            },
+            "time": "2021-05-07T18:12:35+00:00"
+        },
+        {
+            "name": "prooph/standard-projections",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/prooph/standard-projections.git",
+                "reference": "93836c475f8b753d92e1f2a0f1dc5a3e11af1f81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/prooph/standard-projections/zipball/93836c475f8b753d92e1f2a0f1dc5a3e11af1f81",
+                "reference": "93836c475f8b753d92e1f2a0f1dc5a3e11af1f81",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "prooph/event-store": "^7.3.1"
+            },
+            "conflict": {
+                "sandrokeil/interop-config": "<1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.8.4",
+                "malukenho/docheader": "^0.1.4",
+                "phpspec/prophecy": "^1.7",
+                "phpunit/phpunit": "^6.0",
+                "prooph/bookdown-template": "^0.2.3",
+                "prooph/pdo-event-store": "^1.6",
+                "prooph/php-cs-fixer-config": "^0.2.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "prooph/pdo-event-store": "^1.6 for usage with MariaDB, MySQL or Postgres as event store"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prooph\\StandardProjections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha-Oliver Prolic",
+                    "email": "saschaprolic@googlemail.com"
+                },
+                {
+                    "name": "Alexander Miertsch",
+                    "email": "contact@prooph.de",
+                    "homepage": "http://www.prooph.de"
+                }
+            ],
+            "description": "Standard Projections for Prooph EventStore",
+            "homepage": "http://getprooph.org/",
+            "support": {
+                "issues": "https://github.com/prooph/standard-projections/issues",
+                "source": "https://github.com/prooph/standard-projections/tree/v1.1.1"
+            },
+            "time": "2018-02-03T08:18:18+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {
@@ -5358,6 +6171,82 @@
             "time": "2022-01-15T23:54:44+00:00"
         },
         {
+            "name": "react/promise",
+            "version": "v2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "234f8fd1023c9158e2314fa9d7d0e6a83db42910"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/234f8fd1023c9158e2314fa9d7d0e6a83db42910",
+                "reference": "234f8fd1023c9158e2314fa9d7d0e6a83db42910",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.36"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/promise/issues",
+                "source": "https://github.com/reactphp/promise/tree/v2.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-11T10:27:51+00:00"
+        },
+        {
             "name": "roave/psr-container-doctrine",
             "version": "3.5.0",
             "source": {
@@ -5418,6 +6307,82 @@
                 "source": "https://github.com/Roave/psr-container-doctrine/tree/3.5.0"
             },
             "time": "2022-03-08T15:29:59+00:00"
+        },
+        {
+            "name": "sandrokeil/interop-config",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sandrokeil/interop-config.git",
+                "reference": "acb0c24f35f0cd0aec4b6eabd6097cc12bc290f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sandrokeil/interop-config/zipball/acb0c24f35f0cd0aec4b6eabd6097cc12bc290f6",
+                "reference": "acb0c24f35f0cd0aec4b6eabd6097cc12bc290f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "bookdown/bookdown": "^1.1.0",
+                "malukenho/docheader": "^0.1.7",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpbench/phpbench": "^0.15",
+                "phpunit/phpunit": "^7.0.1 || ^9.3.8",
+                "squizlabs/php_codesniffer": "^3.0",
+                "webuni/commonmark-attributes-extension": "^0.5.0",
+                "webuni/commonmark-table-extension": "^0.6.1"
+            },
+            "suggest": {
+                "psr/container": "To retrieve config in your factories"
+            },
+            "bin": [
+                "bin/interop-config"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev",
+                    "dev-develop": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sandro Keil",
+                    "homepage": "https://sandro-keil.de",
+                    "role": "maintainer"
+                }
+            ],
+            "description": "Provides interfaces and a concrete implementation to create instances depending on configuration via factory classes and ensures a valid config structure. It can also be used to auto discover factories and to create configuration files.",
+            "homepage": "https://github.com/sandrokeil/interop-config",
+            "keywords": [
+                "config",
+                "configuration",
+                "factory",
+                "interfaces",
+                "interop",
+                "options",
+                "php",
+                "service",
+                "standard"
+            ],
+            "support": {
+                "docs": "http://sandrokeil.github.io/interop-config/",
+                "issues": "https://github.com/sandrokeil/interop-config/issues",
+                "source": "https://github.com/sandrokeil/interop-config"
+            },
+            "time": "2020-09-05T12:13:30+00:00"
         },
         {
             "name": "symfony/console",
@@ -7855,12 +8820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "7a8c86df136ffe6bd7bc4655d15629a87e5bd022"
+                "reference": "bc4d989050885c9c2138e0da74519efaad597076"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7a8c86df136ffe6bd7bc4655d15629a87e5bd022",
-                "reference": "7a8c86df136ffe6bd7bc4655d15629a87e5bd022",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/bc4d989050885c9c2138e0da74519efaad597076",
+                "reference": "bc4d989050885c9c2138e0da74519efaad597076",
                 "shasum": ""
             },
             "conflict": {
@@ -7939,7 +8904,7 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1|>=2.8.3,<2.8.4",
                 "dolibarr/dolibarr": "<16|= 12.0.5|>= 3.3.beta1, < 13.0.2",
-                "dompdf/dompdf": "<1.2.1",
+                "dompdf/dompdf": "<2",
                 "drupal/core": ">=7,<7.88|>=8,<9.2.13|>=9.3,<9.3.6",
                 "drupal/drupal": ">=7,<7.80|>=8,<8.9.16|>=9,<9.1.12|>=9.2,<9.2.4",
                 "dweeves/magmi": "<=0.7.24",
@@ -7992,7 +8957,7 @@
                 "fuel/core": "<1.8.1",
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
-                "getgrav/grav": "<1.7.33",
+                "getgrav/grav": "<1.7.34",
                 "getkirby/cms": "<3.5.8",
                 "getkirby/panel": "<2.5.14",
                 "gilacms/gila": "<=1.11.4",
@@ -8352,7 +9317,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-29T23:04:12+00:00"
+            "time": "2022-07-06T08:13:54+00:00"
         },
         {
             "name": "sebastian/cli-parser",

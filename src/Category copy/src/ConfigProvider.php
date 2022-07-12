@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Category;
 
-use Category\App\Handlers\CreateCategoryHandler;
 use Category\App\Requests\CategoryRequest;
 use Category\App\Requests\CategoryRequestFactory;
-use Category\Container\CreateCategoryHandlerFactory;
 use Category\Entity\Category;
 use Category\Entity\CategoryCollection;
 use Category\Handler\CreateHandler;
@@ -78,9 +76,7 @@ class ConfigProvider
                 ShowHandler::class => ShowHandlerFactory::class,
                 ProductsCategoryHandler::class => ProductsCategoryHandlerFactory::class,
                 CategoryServiceInterface::class => CategoryServiceFactory::class,
-                CategoryRequest::class => CategoryRequestFactory::class,
-                CreateCategoryHandler::class => CreateCategoryHandlerFactory::class
-
+                CategoryRequest::class => CategoryRequestFactory::class
 
             ],
         ];
