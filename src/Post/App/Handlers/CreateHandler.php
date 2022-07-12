@@ -28,9 +28,10 @@ class CreateHandler
         $this->postRepository = $postRepository;
     }
 
-    public function handle(CreatePost $command) : void
+    public function __invoke(CreatePost $command) : void
     {
-        
+        // var_dump($command);
+        // die;
         $post = Post::create($command->postId(), $command->title(), $command->content());
 
         $this->postRepository->save($post);

@@ -24,6 +24,7 @@ use Prooph\EventStore\EventStore;
 use Prooph\EventStore\Pdo\Container\MySqlEventStoreFactory;
 use Prooph\EventStore\Pdo\Container\MySqlProjectionManagerFactory;
 use Prooph\EventStore\Pdo\MySqlEventStore;
+use Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy;
 use Prooph\EventStore\Projection\ProjectionManager;
 use Prooph\EventStoreBusBridge\Container\TransactionManagerFactory;
 use Prooph\EventStoreBusBridge\TransactionManager;
@@ -33,6 +34,7 @@ use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Container\CommandBusFactory;
 use Prooph\ServiceBus\Container\QueryBusFactory;
 use Prooph\ServiceBus\EventBus;
+use Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy;
 use Prooph\ServiceBus\QueryBus;
 // return [
 //     'prooph' => [
@@ -122,67 +124,148 @@ use Prooph\ServiceBus\QueryBus;
 //     ]  
 // ];
 
+// return [
+//     'prooph' => [
+//         'event_store' => [
+//             'default' => [
+//                 'connection' => 'pdo.connection',
+//                 'message_factory' => FQCNMessageFactory::class,
+//                 'persistence_strategy' => MySqlAggregateStreamStrategy::class,
+//                 'plugins' => [
+//                     EventPublisher::class,
+//                 ],
+//             ],
+//         ],
+//         'event_sourcing' => [
+//             'aggregate_repository' => [
+//                 'post_collection' => [
+//                     'repository_class' => \Post\Infrastructure\PostRepositoryImpl::class,
+//                     'aggregate_type' => [
+//                        'post'=> Post::class,
+//                     ],
+//                     'aggregate_translator' => AggregateTranslator::class,
+//                     'stream_name' => 'post',
+//                     'one_stream_per_aggregate' => true,
+//                 ],
+//             ],
+//         ],
+//         'middleware' => [
+//             'command' => [
+//                 'response_strategy' => JsonResponse::class,
+//                 'message_factory' => FQCNMessageFactory::class,
+//             ],
+//         ],
+//         'service_bus' => [
+//             'command_bus' => [
+//                 'router' => [
+//                     'routes' => [
+//                       CreatePost::class => CreateHandler::class
+//                     ],
+//                 ],
+//                 // 'plugins' => [
+//                 //     EventPublisher::class,
+//                 // ],
+//             ],
+//             'event_bus' => [
+//                 'plugins' => [
+//                     \Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy::class,
+//                 ],
+//             ],
+//             // 'query_bus' => [
+//             //     'router' => [
+//             //         'routes' => [
+//             //             'fetch-posts' => PostsFinder::class,
+//             //         ],
+//             //     ],
+//             //     'plugins' => [
+//             //         FinderInvokeStrategy::class,
+//             //     ]
+//             // ]
+//         ],
+//         'projection_manager' => [
+//             'default' => [
+//                 'connection' => 'pdo.connection',
+//             ],
+//         ],
+//         'pdo_connection' => [
+//             'default' => [
+//                 'schema' => 'mysql',
+//                 'host' => '127.0.0.1',
+//                 'port' => '3306',
+//                 'user' => 'root',
+//                 'password' => '',
+//                 'dbname' => 'mezzio_02',
+//                 'charset' => 'utf8',
+//             ],
+//         ],
+//     ],
+//     'dependencies' => [
+//         'factories' => [
+//             'pdo.connection' => PdoConnectionFactory::class,
+//             // \Prooph\Common\Messaging\NoOpMessageConverter::class => InvokableFactory::class,
+//             \Prooph\Common\Messaging\FQCNMessageFactory::class => InvokableFactory::class,
+//             AggregateTranslator::class => InvokableFactory::class,
+//             // CommandFactory::class => InvokableFactory::class,
+//             CommandBus::class => CommandBusFactory::class,
+//             EventStore::class => MySqlEventStoreFactory::class,
+//             EventBus::class => InvokableFactory::class,
+//             PostRepository::class => [AggregateRepositoryFactory::class, 'post_collection'],
+//             CreateHandler::class => CreateHandlerFactory::class,
+//             \Prooph\HttpMiddleware\CommandMiddleware::class => \Prooph\HttpMiddleware\Container\CommandMiddlewareFactory::class,
+//             // EventFactory::class => InvokableFactory::class,
+//              MySqlAggregateStreamStrategy::class => InvokableFactory::class,
+//              ProjectionManager::class => MySqlProjectionManagerFactory::class,
+//              QueryBus::class => QueryBusFactory::class,
+//              CommandMiddleware::class => CommandMiddlewareFactory::class,
+//              JsonResponse::class => InvokableFactory::class,
+//               //prooph/event-store-bus-bridge set up
+//             \Prooph\EventStoreBusBridge\TransactionManager::class => \Prooph\EventStoreBusBridge\Container\TransactionManagerFactory::class,
+//             \Prooph\EventStoreBusBridge\EventPublisher::class => \Prooph\EventStoreBusBridge\Container\EventPublisherFactory::class,
+//         ],
+//     ]
+
+// ];
+
+
 return [
     'prooph' => [
-        'event_store' => [
-            'default' => [
-                'connection' => 'pdo.connection',
-                'message_factory' => FQCNMessageFactory::class,
-                'persistence_strategy' => MySqlAggregateStreamStrategy::class,
-                'plugins' => [
-                    EventPublisher::class,
-                ],
+        'middleware' => [
+            'query' => [
+                'response_strategy' => JsonResponse::class,
+                'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
+            ],
+            'command' => [
+                'response_strategy' => JsonResponse::class,
+                'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
+            ],
+            'event' => [
+                'response_strategy' => JsonResponse::class,
+                'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
+            ],
+            'message' => [
+                'response_strategy' => JsonResponse::class,
+                'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
             ],
         ],
         'event_sourcing' => [
             'aggregate_repository' => [
                 'post_collection' => [
-                    'repository_class' => \Post\Infrastructure\PostRepositoryImpl::class,
-                    'aggregate_type' => [
-                       'post'=> Post::class,
-                    ],
-                    'aggregate_translator' => AggregateTranslator::class,
+                    'repository_class' => PostRepositoryImpl::class,
+                    'aggregate_type' => Post::class,
+                    'aggregate_translator' => \Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator::class,
                     'stream_name' => 'post',
                     'one_stream_per_aggregate' => true,
                 ],
             ],
         ],
-        'middleware' => [
-            'command' => [
-                'response_strategy' => JsonResponse::class,
-                'message_factory' => FQCNMessageFactory::class,
-            ],
-        ],
-        'service_bus' => [
-            'command_bus' => [
-                'router' => [
-                    'routes' => [
-                      CreatePost::class => CreateHandler::class
-                    ],
-                ],
-                // 'plugins' => [
-                //     EventPublisher::class,
-                // ],
-            ],
-            'event_bus' => [
-                'plugins' => [
-                    \Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy::class,
-                ],
-            ],
-            // 'query_bus' => [
-            //     'router' => [
-            //         'routes' => [
-            //             'fetch-posts' => PostsFinder::class,
-            //         ],
-            //     ],
-            //     'plugins' => [
-            //         FinderInvokeStrategy::class,
-            //     ]
-            // ]
-        ],
-        'projection_manager' => [
+        'event_store' => [
             'default' => [
                 'connection' => 'pdo.connection',
+                'message_factory' => FQCNMessageFactory::class,
+                'persistence_strategy' => MySqlSingleStreamStrategy::class,
+                'plugins' => [
+                    EventPublisher::class,
+                ],
             ],
         ],
         'pdo_connection' => [
@@ -196,30 +279,68 @@ return [
                 'charset' => 'utf8',
             ],
         ],
+        'projection_manager' => [
+            'default' => [
+                'connection' => 'pdo.connection',
+            ],
+        ],
+        'service_bus' => [
+            'command_bus' => [
+                'router' => [
+                    'routes' => [
+                        CreatePost::class => CreateHandler::class,
+                    ],
+                ],
+            ],
+            'event_bus' => [
+                'plugins' => [
+                    \Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy::class,
+                ],
+                'router' => [
+                    'routes' => [
+                       
+                    ],
+                ],
+            ],
+            'query_bus' => [
+                'router' => [
+                    'routes' => [
+                       ],
+                ],
+            ],
+        ],
     ],
     'dependencies' => [
+       
         'factories' => [
             'pdo.connection' => PdoConnectionFactory::class,
-            // \Prooph\Common\Messaging\NoOpMessageConverter::class => InvokableFactory::class,
+            \Prooph\Common\Messaging\NoOpMessageConverter::class => InvokableFactory::class,
             \Prooph\Common\Messaging\FQCNMessageFactory::class => InvokableFactory::class,
-            AggregateTranslator::class => InvokableFactory::class,
-            // CommandFactory::class => InvokableFactory::class,
-            CommandBus::class => CommandBusFactory::class,
-            EventStore::class => MySqlEventStoreFactory::class,
-            EventBus::class => InvokableFactory::class,
-            PostRepository::class => [AggregateRepositoryFactory::class, 'post_collection'],
-            CreateHandler::class => CreateHandlerFactory::class,
+            // prooph/psr7-middleware set up
             \Prooph\HttpMiddleware\CommandMiddleware::class => \Prooph\HttpMiddleware\Container\CommandMiddlewareFactory::class,
-            // EventFactory::class => InvokableFactory::class,
-             MySqlAggregateStreamStrategy::class => InvokableFactory::class,
-             ProjectionManager::class => MySqlProjectionManagerFactory::class,
-             QueryBus::class => QueryBusFactory::class,
-             CommandMiddleware::class => CommandMiddlewareFactory::class,
-             JsonResponse::class => InvokableFactory::class,
-              //prooph/event-store-bus-bridge set up
-            \Prooph\EventStoreBusBridge\TransactionManager::class => \Prooph\EventStoreBusBridge\Container\TransactionManagerFactory::class,
+            \Prooph\HttpMiddleware\EventMiddleware::class => \Prooph\HttpMiddleware\Container\EventMiddlewareFactory::class,
+            \Prooph\HttpMiddleware\QueryMiddleware::class => \Prooph\HttpMiddleware\Container\QueryMiddlewareFactory::class,
+            \Prooph\HttpMiddleware\MessageMiddleware::class => \Prooph\HttpMiddleware\Container\MessageMiddlewareFactory::class,
+            //prooph/service-bus set up
+            \Prooph\ServiceBus\CommandBus::class => \Prooph\ServiceBus\Container\CommandBusFactory::class,
+            \Prooph\ServiceBus\EventBus::class => \Prooph\ServiceBus\Container\EventBusFactory::class,
+            \Prooph\ServiceBus\QueryBus::class => \Prooph\ServiceBus\Container\QueryBusFactory::class,
+            //prooph/event-store-bus-bridge set up
+            // \Prooph\EventStoreBusBridge\TransactionManager::class => \Prooph\EventStoreBusBridge\Container\TransactionManagerFactory::class,
             \Prooph\EventStoreBusBridge\EventPublisher::class => \Prooph\EventStoreBusBridge\Container\EventPublisherFactory::class,
+            // \Prooph\Cli\Console\Helper\ClassInfo::class => \Prooph\ProophessorDo\Container\Console\Psr4ClassInfoFactory::class,
+            // persistence strategies
+            MySqlSingleStreamStrategy::class => InvokableFactory::class,
+            
+            EventStore::class => MySqlEventStoreFactory::class,
+            ProjectionManager::class => MySqlProjectionManagerFactory::class,
+            PostRepository::class => [AggregateRepositoryFactory::class, 'post_collection'],
+            // CreateHandler::class => CreateHandlerFactory::class,
+            MySqlAggregateStreamStrategy::class => InvokableFactory::class,
+            JsonResponse::class => InvokableFactory::class,
+            AggregateTranslator::class => InvokableFactory::class,
+            OnEventStrategy::class => InvokableFactory::class,
         ],
-    ]
 
+    ],
 ];

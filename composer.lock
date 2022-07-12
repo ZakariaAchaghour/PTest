@@ -2522,16 +2522,16 @@
         },
         {
             "name": "laminas/laminas-filter",
-            "version": "2.14.0",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-filter.git",
-                "reference": "98a126b8cd069a446054680c9be5f37a61f6dc17"
+                "reference": "bf385b844e782df77971e0c5ce88318e7ae89bcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/98a126b8cd069a446054680c9be5f37a61f6dc17",
-                "reference": "98a126b8cd069a446054680c9be5f37a61f6dc17",
+                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/bf385b844e782df77971e0c5ce88318e7ae89bcb",
+                "reference": "bf385b844e782df77971e0c5ce88318e7ae89bcb",
                 "shasum": ""
             },
             "require": {
@@ -2545,7 +2545,7 @@
             "require-dev": {
                 "laminas/laminas-coding-standard": "^2.3.0",
                 "laminas/laminas-crypt": "^3.5.1",
-                "laminas/laminas-servicemanager": "^3.7.0",
+                "laminas/laminas-servicemanager": "^3.14.0",
                 "laminas/laminas-uri": "^2.9.1",
                 "pear/archive_tar": "^1.4.14",
                 "phpspec/prophecy-phpunit": "^2.0.1",
@@ -2597,7 +2597,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-02-22T23:09:15+00:00"
+            "time": "2022-07-12T10:09:21+00:00"
         },
         {
             "name": "laminas/laminas-form",
@@ -3252,21 +3252,21 @@
         },
         {
             "name": "laminas/laminas-paginator",
-            "version": "2.12.2",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-paginator.git",
-                "reference": "e2e5a17e2b6ca750e4a75b8f34763c63cc6bf8fa"
+                "reference": "2d6a9d21f5d67963347d497cd53873e3e693b0b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-paginator/zipball/e2e5a17e2b6ca750e4a75b8f34763c63cc6bf8fa",
-                "reference": "e2e5a17e2b6ca750e4a75b8f34763c63cc6bf8fa",
+                "url": "https://api.github.com/repos/laminas/laminas-paginator/zipball/2d6a9d21f5d67963347d497cd53873e3e693b0b5",
+                "reference": "2d6a9d21f5d67963347d497cd53873e3e693b0b5",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laminas/laminas-stdlib": "^3.6.2",
+                "laminas/laminas-stdlib": "^3.10.1",
                 "php": "^7.4 || ~8.0.0 || ~8.1.0"
             },
             "conflict": {
@@ -3278,11 +3278,11 @@
                 "laminas/laminas-coding-standard": "^2.3.0",
                 "laminas/laminas-config": "^3.7.0",
                 "laminas/laminas-filter": "^2.13.0",
-                "laminas/laminas-servicemanager": "^3.10.0",
+                "laminas/laminas-servicemanager": "^3.14.0",
                 "laminas/laminas-view": "^2.15.0",
-                "phpunit/phpunit": "^9.5.10",
+                "phpunit/phpunit": "^9.5.21",
                 "psalm/plugin-phpunit": "^0.16.1",
-                "vimeo/psalm": "^4.15.0"
+                "vimeo/psalm": "^4.24.0"
             },
             "suggest": {
                 "laminas/laminas-cache": "Laminas\\Cache component to support cache features",
@@ -3327,7 +3327,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-01-11T18:09:02+00:00"
+            "time": "2022-07-12T11:56:05+00:00"
         },
         {
             "name": "laminas/laminas-router",
@@ -3779,16 +3779,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.20.0",
+            "version": "2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "2cd6973a3e042be3d244260fe93f435668f5c2b4"
+                "reference": "4145f10db72ebfe34d11bc3b6a298aa62ad9533f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/2cd6973a3e042be3d244260fe93f435668f5c2b4",
-                "reference": "2cd6973a3e042be3d244260fe93f435668f5c2b4",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/4145f10db72ebfe34d11bc3b6a298aa62ad9533f",
+                "reference": "4145f10db72ebfe34d11bc3b6a298aa62ad9533f",
                 "shasum": ""
             },
             "require": {
@@ -3799,8 +3799,8 @@
                 "laminas/laminas-escaper": "^2.5",
                 "laminas/laminas-eventmanager": "^3.4",
                 "laminas/laminas-json": "^3.3",
-                "laminas/laminas-servicemanager": "^3.10",
-                "laminas/laminas-stdlib": "^3.6",
+                "laminas/laminas-servicemanager": "^3.14.0",
+                "laminas/laminas-stdlib": "^3.10.1",
                 "php": "^7.4 || ~8.0.0 || ~8.1.0",
                 "psr/container": "^1 || ^2"
             },
@@ -3882,7 +3882,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-02-22T13:52:44+00:00"
+            "time": "2022-07-10T15:36:43+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -8820,12 +8820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "bc4d989050885c9c2138e0da74519efaad597076"
+                "reference": "2a1896038681217c0ee6363cb472aad856396eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/bc4d989050885c9c2138e0da74519efaad597076",
-                "reference": "bc4d989050885c9c2138e0da74519efaad597076",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2a1896038681217c0ee6363cb472aad856396eea",
+                "reference": "2a1896038681217c0ee6363cb472aad856396eea",
                 "shasum": ""
             },
             "conflict": {
@@ -8984,6 +8984,7 @@
                 "illuminate/view": "<6.20.42|>=7,<7.30.6|>=8,<8.75",
                 "impresscms/impresscms": "<=1.4.3",
                 "in2code/femanager": "<5.5.1|>=6,<6.3.1",
+                "in2code/lux": "<17.6.1|>=18,<24.0.2",
                 "intelliants/subrion": "<=4.2.1",
                 "ivankristianto/phpwhois": "<=4.3",
                 "jackalope/jackalope-doctrine-dbal": "<1.7.4",
@@ -9317,7 +9318,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-06T08:13:54+00:00"
+            "time": "2022-07-12T11:07:36+00:00"
         },
         {
             "name": "sebastian/cli-parser",

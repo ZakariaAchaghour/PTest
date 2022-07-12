@@ -50,7 +50,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 ListHandler::class => ListHandlerFactory::class,
-                CreateHandler::class => CreateHandlerFactory::class
+                // CreateHandler::class => CreateHandlerFactory::class
             ],
         ];
     }

@@ -67,15 +67,22 @@ class Post extends AggregateRoot
     protected function apply(AggregateChanged $event): void
     {
         // TODO: Implement apply() method.
-        switch (get_class($event)) {
-            case PostWasCreated::class:
-                //Simply assign the event payload to the appropriate properties
-                $this->postId = $event->postId();
-                $this->title = $event->title();
-                $this->content = $event->content();
-                break;
-            default:
-                throw new \RuntimeException('Invalid event given');
+        if ($event instanceof PostWasCreated) {
+            $this->postId = $event->postId();
+            $this->title = $event->title();
+            $this->content = $event->content();
+        } else {
+            throw new \RuntimeException('Invalid event given');
         }
+        // switch (get_class($event)) {
+        //     case PostWasCreated::class:
+        //         //Simply assign the event payload to the appropriate properties
+        //         $this->postId = $event->aggregateId();
+        //         $this->title = $event->title();
+        //         $this->content = $event->content();
+        //         break;
+        //     default:
+        //         throw new \RuntimeException('Invalid event given');
+        // }
     }
 }

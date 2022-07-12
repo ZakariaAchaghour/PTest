@@ -10,7 +10,7 @@ use Post\Model\ValueObjects\Title;
 use Prooph\Common\Messaging\Command;
 use Prooph\Common\Messaging\PayloadTrait;
 
-class CreatePost extends Command
+class CreatePost extends Command 
 {
     // /**
     //  * @var string
@@ -22,6 +22,8 @@ class CreatePost extends Command
 
     public function postId(): PostId
     {
+        // var_dump($this->payload);
+        // die;
         return PostId::fromString($this->payload['postId']);
     }
     public function title(): Title
