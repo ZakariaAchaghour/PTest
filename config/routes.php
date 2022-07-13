@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
+use Post\Actions\PostsListHandler;
+use Post\App\Commands\ChangeTitlePost;
 use Post\App\Commands\CreatePost;
 use Post\Middleware\JsonPayload;
 use Prooph\HttpMiddleware\CommandMiddleware;
@@ -43,6 +45,8 @@ use Psr\Container\ContainerInterface;
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/api/v1/posts', PostsListHandler::class, 'posts');
+
     $app->post('/api/v2/post',
             [
             JsonPayload::class,
@@ -56,5 +60,19 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             },
             CommandMiddleware::class
         ],'command::create-post');
+
+        $app->post('/api/v2/post/title',
+            [
+            JsonPayload::class,
+            function (\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Server\RequestHandlerInterface $handler) : \Psr\Http\Message\ResponseInterface {
+                $request = $request->withAttribute(
+                    \Prooph\HttpMiddleware\CommandMiddleware::NAME_ATTRIBUTE,
+                    ChangeTitlePost::class
+                );
+
+                return $handler->handle($request);
+            },
+            CommandMiddleware::class
+        ],'command::post-title-change');
 
 };

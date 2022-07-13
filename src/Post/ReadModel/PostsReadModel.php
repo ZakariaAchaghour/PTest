@@ -22,15 +22,13 @@ class PostsReadModel extends AbstractReadModel
     public function init(): void
     {
         $statement = $this->connection->prepare(<<<SQL
-            CREATE TABLE posts (
-            id char(36),
-            title VARCHAR(150) NOT NULL,
-            content TEXT NOT NULL,
-            PRIMARY KEY (id),
-            UNIQUE (id)
-            );
-            SQL
-                    );
+        CREATE TABLE `posts` (
+        `id` char(36) COLLATE utf8_unicode_ci NOT NULL,
+        `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+        `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+    SQL);
         $statement->execute();
     }
 
@@ -66,5 +64,11 @@ class PostsReadModel extends AbstractReadModel
             $data['title'],
             $data['content'],
         ]);
+    }
+
+    protected function renamePost(array $data): void
+    {
+        $stmt = $this->connection->prepare('UPDATE posts SET title=? WHERE id=?');
+        $stmt->execute([$data['title'], $data['postId']]);
     }
 }

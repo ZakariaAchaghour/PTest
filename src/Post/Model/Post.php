@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Post\Model;
 
 use Post\Model\Events\PostWasCreated;
+use Post\Model\Events\PostWasRenamed;
 use Post\Model\ValueObjects\Content;
 use Post\Model\ValueObjects\PostId;
 use Post\Model\ValueObjects\Title;
@@ -27,6 +28,11 @@ class Post extends AggregateRoot
      * @var Content
      */
     private $content;
+    /**
+     *
+     * @var Post[]
+     */
+    private array $posts = [];
 
     public static function create(PostId $postId, Title $title, Content $content): Post
     {
@@ -34,6 +40,22 @@ class Post extends AggregateRoot
         $post->recordThat(PostWasCreated::with($postId, $title,$content));
         return $post;
     }
+
+    public function changeTitle(Title $newTitle) : void
+    {
+        // check 
+        
+        $this->recordThat(PostWasRenamed::updateEmail($this->postId, $newTitle));
+    }
+    // public function changeTitle(Title $newTitle): void
+    // {
+    //     if ($newTitle !== $this->title) {
+    //         $this->recordThat(PostWasRenamed::occur(
+    //            $this->postId->toString(),
+    //             ['title' => $newTitle->toString()]
+    //         ));
+    //     }
+    // }
     protected function aggregateId(): string
     {
         // TODO: Implement aggregateId() method.
@@ -71,6 +93,10 @@ class Post extends AggregateRoot
             $this->postId = $event->postId();
             $this->title = $event->title();
             $this->content = $event->content();
+        }
+        elseif ($event instanceof PostWasRenamed) {
+            // $this->postId = $event->aggregateId();
+            $this->title = $event->title();
         } else {
             throw new \RuntimeException('Invalid event given');
         }

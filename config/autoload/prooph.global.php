@@ -5,17 +5,15 @@ declare(strict_types=1);
 use \Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy;
 use \Prooph\EventStoreBusBridge\EventPublisher;
 use \Laminas\ServiceManager\Factory\InvokableFactory;
-use \Prooph\EventStoreBusBridge\Container\EventPublisherFactory;
+use Post\App\Commands\ChangeTitlePost;
 use \Prooph\EventStore\Pdo\Container\PdoConnectionFactory;
-use \Post\Infrastructure\EventStorePostCollection;
 use \Post\Model\Post;
 use \Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator;
-// use \Post\Infrastructure\EventFactory;
-// use \Post\Infrastructure\CommandFactory;
 use Post\Response\JsonResponse;
 use Post\App\Commands\CreatePost;
+use Post\App\Handlers\ChangePostTitleHandler;
 use Post\App\Handlers\CreateHandler;
-use Post\Container\CreateHandlerFactory;
+use Post\App\Handlers\ListHandler;
 use Post\Container\ReadModel\Finder\PostsFinderFactory;
 use Post\Infrastructure\PostRepositoryImpl;
 use Post\Model\Repository\PostRepository;
@@ -26,21 +24,12 @@ use Prooph\EventSourcing\Container\Aggregate\AggregateRepositoryFactory;
 use Prooph\EventStore\EventStore;
 use Prooph\EventStore\Pdo\Container\MySqlEventStoreFactory;
 use Prooph\EventStore\Pdo\Container\MySqlProjectionManagerFactory;
-use Prooph\EventStore\Pdo\MySqlEventStore;
 use Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSimpleStreamStrategy;
 use Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy;
 use Prooph\EventStore\Projection\ProjectionManager;
-use Prooph\EventStoreBusBridge\Container\TransactionManagerFactory;
-use Prooph\EventStoreBusBridge\TransactionManager;
-use Prooph\HttpMiddleware\CommandMiddleware;
-use Prooph\HttpMiddleware\Container\CommandMiddlewareFactory;
-use Prooph\ServiceBus\CommandBus;
-use Prooph\ServiceBus\Container\CommandBusFactory;
-use Prooph\ServiceBus\Container\QueryBusFactory;
-use Prooph\ServiceBus\EventBus;
+
 use Prooph\ServiceBus\Plugin\InvokeStrategy\FinderInvokeStrategy;
 use Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy;
-use Prooph\ServiceBus\QueryBus;
 use Prooph\SnapshotStore\Pdo\Container\PdoSnapshotStoreFactory;
 use Prooph\SnapshotStore\SnapshotStore;
 
@@ -268,7 +257,7 @@ return [
                         'post' => Post::class,
                     ],
                     'aggregate_translator' => \Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator::class,
-                    'stream_name' => 'post',
+                    'stream_name' => 'stream_post',
                     'one_stream_per_aggregate' => true,
                     'snapshot_store' => SnapshotStore::class,
                 ],
@@ -276,7 +265,8 @@ return [
         ],
         'event_store' => [
             'default' => [
-                'connection' => 'pdo.connection',
+                 'connection' => 'pdo.connection',
+                // 'connection' => 'doctrine.pdo.connection',
                 'message_factory' => FQCNMessageFactory::class,
                 // 'persistence_strategy' => MySqlSingleStreamStrategy::class,
                 'persistence_strategy' => MySqlSimpleStreamStrategy::class,
@@ -299,6 +289,7 @@ return [
         ],
         'projection_manager' => [
             'default' => [
+                // 'event_store' => MySqlEventStore::class,
                 'connection' => 'pdo.connection',
             ],
         ],
@@ -307,6 +298,7 @@ return [
                 'router' => [
                     'routes' => [
                         CreatePost::class => CreateHandler::class,
+                        ChangeTitlePost::class => ChangePostTitleHandler::class,
                     ],
                 ],
             ],
@@ -323,7 +315,7 @@ return [
             'query_bus' => [
                 'router' => [
                     'routes' => [
-                        FetchPosts::class => PostsFinder::class,
+                        FetchPosts::class => ListHandler::class,
                        ],
                 ],
                 'plugins' => [

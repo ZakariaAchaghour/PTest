@@ -6,6 +6,8 @@ namespace Post;
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
+use Post\Actions\PostsListHandler;
+use Post\Actions\PostsListHandlerFactory;
 use Post\App\Handlers\CreateHandler;
 use Post\App\Handlers\ListHandler;
 use Post\Container\CreateHandlerFactory;
@@ -51,6 +53,8 @@ class ConfigProvider
             'factories'  => [
                 ListHandler::class => ListHandlerFactory::class,
                 // CreateHandler::class => CreateHandlerFactory::class
+                PostsListHandler::class => PostsListHandlerFactory::class,
+
             ],
         ];
     }

@@ -71,6 +71,10 @@ class ConfigProvider
             'aliases' => [
             ],
             'factories'  => [
+                // handlers
+
+
+                // requests
                 ListHandler::class => ListHandlerFactory::class,
                 CreateHandler::class => CreateHandlerFactory::class,
                 EditHandler::class => EditHandlerFactory::class,

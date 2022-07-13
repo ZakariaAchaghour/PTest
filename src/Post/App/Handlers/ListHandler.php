@@ -5,28 +5,27 @@ declare(strict_types=1);
 namespace Post\App\Handlers;
 
 use Laminas\Diactoros\Response\JsonResponse;
+
 use Post\ReadModel\Queries\FetchPosts;
-use Prooph\ServiceBus\QueryBus;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
+use Post\ReadModel\Finder\PostsFinder;
+use React\Promise\Deferred;
 
-class ListHandler implements RequestHandlerInterface
+class ListHandler 
 {
-    private $queryBus;
-    public function __construct(QueryBus $queryBus)
+    private $postFinder;
+    public function __construct(PostsFinder $postFinder)
     {
-        $this->queryBus = $queryBus;
+        $this->postFinder = $postFinder;
     }
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function __invoke(FetchPosts $query, Deferred $deferred = null)
     {
-        $results = null;
-        // Create and return a response
-        $promise = $this->queryBus->dispatch(new FetchPosts([]));
-        $promise->then(function ($result) use (& $results): void {
-            $results = $result;
-        });
+        var_dump('ok');
+        die;
+        $posts = $this->postFinder->findAll();
+        if (null === $deferred) {
+            return $posts;
+        }
 
-        return new JsonResponse($results,200);
+        $deferred->resolve($posts);
     }
 }
