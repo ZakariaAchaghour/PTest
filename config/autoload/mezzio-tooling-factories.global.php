@@ -13,16 +13,7 @@ declare(strict_types=1);
 return [
     'dependencies' => [
         'factories' => [
-            Category\App\Handlers\CreateCategoryHandler::class => Category\Container\CreateCategoryHandlerFactory::class,
-            Category\App\Requests\CategoryRequest::class => Category\App\Requests\CategoryRequestFactory::class,
-            Category\Handler\ProductsCategoryHandler::class => Category\Handler\ProductsCategoryHandlerFactory::class,
-            Post\Actions\PostsListHandler::class => Post\Actions\PostsListHandlerFactory::class,
-            Post\App\Handlers\ChangePostTitleHandler::class => Post\Container\ChangePostTitleFactory::class,
-            Post\App\Handlers\CreateHandler::class => Post\Container\CreateHandlerFactory::class,
-            Post\App\Handlers\ListHandler::class => Post\App\Handlers\ListHandlerFactory::class,
-            Product\Handler\CreateHandler::class => Product\Handler\CreateHandlerFactory::class,
-            Product\Handler\DeleteHandler::class => Product\Handler\DeleteHandlerFactory::class,
-            Product\Handler\EditHandler::class => Product\Handler\EditHandlerFactory::class,
+
         ],
     ],
 ];
